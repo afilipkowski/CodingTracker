@@ -23,7 +23,18 @@ internal class UserInterface
                 case MenuOption.AddSession:
                     _codingSessionController.RecordSession();
                     break;
+                case MenuOption.ViewSessions:
+                    _codingSessionController.DisplaySessions();
+                    break;
+                case MenuOption.DeleteSession:
+                    _codingSessionController.DeleteSession();
+                    break;
+                case MenuOption.UpdateSession:
+                    _codingSessionController.RecordSession(update:true);
+                    break;
             }
+            AnsiConsole.MarkupLine("Press any key to continue");
+            Console.ReadKey();
         }
     }
 }

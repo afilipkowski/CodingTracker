@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using CodingTracker.Models;
 using Spectre.Console;
 
 namespace CodingTracker.Helpers;
@@ -18,5 +19,12 @@ internal class InputHelper
             userInput = Console.ReadLine();
         }
         return dateTime;
+    }
+
+    internal static string CalculateDuration (DateTime t1, DateTime t2)
+    {
+        TimeSpan durationTs = t2 - t1;
+        string duration = string.Format("{0:00}:{1:00}", durationTs.Hours, durationTs.Minutes);
+        return duration;
     }
 }
