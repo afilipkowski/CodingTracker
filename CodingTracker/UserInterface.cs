@@ -6,7 +6,7 @@ namespace CodingTracker;
 
 internal class UserInterface
 {
-    private readonly CodingSessionController _codingSessionController = new CodingSessionController();
+    private readonly CodingSessionController _codingSessionController = new();
     internal void MainMenu()
     {
         while (true)
@@ -30,9 +30,10 @@ internal class UserInterface
                     _codingSessionController.DeleteSession();
                     break;
                 case MenuOption.UpdateSession:
-                    _codingSessionController.RecordSession(update:true);
+                    _codingSessionController.RecordSession(update: true);
                     break;
             }
+
             AnsiConsole.MarkupLine("Press any key to continue");
             Console.ReadKey();
         }

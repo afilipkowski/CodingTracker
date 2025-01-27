@@ -1,4 +1,6 @@
-﻿namespace CodingTracker;
+﻿using System.ComponentModel;
+
+namespace CodingTracker;
 
 internal class Enums
 {

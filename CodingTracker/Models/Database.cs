@@ -7,7 +7,7 @@ namespace CodingTracker.Models;
 internal class Database
 {
     private string connectionString = ConfigurationManager.ConnectionStrings["databaseConn"].ConnectionString;
-    private string tableName = "coding_sessions";
+    private string tableName = ConfigurationManager.AppSettings["tableName"];
 
     internal Database()
     {
@@ -33,7 +33,7 @@ internal class Database
         using (var connection = new SqliteConnection(connectionString))
         {
             var command = $"SELECT * FROM {tableName}";
-            sessions = connection.Query<CodingSession>(command).ToList(); ;
+            sessions = connection.Query<CodingSession>(command).ToList();
         }
         return sessions;
     }
@@ -52,7 +52,7 @@ internal class Database
         using (var connection = new SqliteConnection(connectionString))
         {
             var command = $"UPDATE {tableName} SET StartTime=@StartTime, EndTime=@EndTime, Duration=@Duration WHERE Id = @Id";
-            return connection.Execute(command, new { StartTime = session.StartTime, EndTime = session.EndTime, Duration=session.Duration, Id = id }) > 0;
+            return connection.Execute(command, new { StartTime = session.StartTime, EndTime = session.EndTime, Duration = session.Duration, Id = id }) > 0;
         }
     }
 }

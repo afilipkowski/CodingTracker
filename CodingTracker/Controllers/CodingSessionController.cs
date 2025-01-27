@@ -9,8 +9,18 @@ internal class CodingSessionController
     private readonly Database db = new Database();
     public void RecordSession(bool update = false)
     {
-        DateTime startTime = InputHelper.GetDateInput("start");
-        DateTime endTime = InputHelper.GetDateInput("end");
+        DateTime startTime;
+        DateTime endTime;
+        int id = 0;
+
+        if (update)
+        {
+            DisplaySessions();
+            id = AnsiConsole.Ask<int>("Enter the [green]ID[/] of the session you want to update:");
+        }
+
+        startTime = InputHelper.GetDateInput("start");
+        endTime = InputHelper.GetDateInput("end");
 
         if (startTime > endTime)
         {
@@ -27,8 +37,6 @@ internal class CodingSessionController
 
         if (update)
         {
-            DisplaySessions();
-            var id = AnsiConsole.Ask<int>("Enter the [green]ID[/] of the session you want to update:");
             if (db.UpdateSession(id, session))
             {
                 AnsiConsole.MarkupLine("[green]Session updated successfully.[/]");
